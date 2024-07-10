@@ -1,0 +1,35 @@
+C - PROGRAM : 
+
+#include <stdio.h>
+#include <stdlib.h> 
+int compare(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+int findMaxAfterSort(int *nums, int numsSize) {
+    qsort(nums, numsSize, sizeof(int), compare);
+    return nums[numsSize - 1];
+}
+
+int main() {
+    int nums[] = {3,3,3,3,3};
+    int numsSize = sizeof(nums) / sizeof(nums[0]);
+    
+    int maxElement = findMaxAfterSort(nums, numsSize);
+    
+    printf("Maximum element after sorting: %d\n", maxElement);
+    
+    return 0;
+}
+
+/////////////////////////////////////////////////////////////////
+
+PYTHON : 
+
+def find_max_after_sort(nums):
+    sorted_nums = sorted(nums)
+    return sorted_nums[-1]
+
+nums = [3,3,3,3,3]
+max_element = find_max_after_sort(nums)
+print(f"Maximum element after sorting: {max_element}")
