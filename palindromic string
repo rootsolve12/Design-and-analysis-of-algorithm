@@ -1,0 +1,64 @@
+C - PROGRAM :
+
+#include <stdio.h>
+#include <string.h>
+
+int isPalindrome(char *str) {
+    int left = 0;
+    int right = strlen(str) - 1;
+    
+    while (left < right) {
+        if (str[left] != str[right]) {
+            return 0;
+        }
+        left++;
+        right--;
+    }
+    
+    return 1;
+}
+
+char* firstPalindromicString(char **words, int wordsSize) {
+    for (int i = 0; i < wordsSize; i++) {
+        if (isPalindrome(words[i])) {
+            return words[i];
+        }
+    }
+    
+    return "";
+}
+
+int main() {
+    char *words[] = {"hello", "racecar", "world", "level"};
+    int size = sizeof(words) / sizeof(words[0]);
+    
+    char *result = firstPalindromicString(words, size);
+    
+    if (strlen(result) == 0) {
+        printf("No palindromic string found.\n");
+    } else {
+        printf("First palindromic string: %s\n", result);
+    }
+    
+    return 0;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
+PYTHON : 
+
+def is_palindrome(s):
+    return s == s[::-1]
+
+def first_palindromic_string(words):
+    for word in words:
+        if is_palindrome(word):
+            return word
+    return ""
+words = ["notpalindrome", "racecar"]
+result = first_palindromic_string(words)
+
+if result == "":
+    print("No palindromic string found.")
+else:
+    print(f"First palindromic string: {result}")
