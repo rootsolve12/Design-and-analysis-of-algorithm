@@ -1,0 +1,88 @@
+C - PROGRAM : 
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int answer1(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+    int count = 0;
+    bool found;
+
+    for (int i = 0; i < nums1Size; ++i) {
+        found = false;
+        for (int j = 0; j < nums2Size; ++j) {
+            if (nums1[i] == nums2[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            ++count;
+        }
+    }
+
+    return count;
+}
+
+int answer2(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+    int count = 0;
+    bool found;
+
+    for (int i = 0; i < nums2Size; ++i) {
+        found = false;
+        for (int j = 0; j < nums1Size; ++j) {
+            if (nums2[i] == nums1[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            ++count;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int nums1[] = {2,3,2};
+    int nums2[] = {1,2};
+    int nums1Size = sizeof(nums1) / sizeof(nums1[0]);
+    int nums2Size = sizeof(nums2) / sizeof(nums2[0]);
+
+    int ans1 = answer1(nums1, nums1Size, nums2, nums2Size);
+    int ans2 = answer2(nums1, nums1Size, nums2, nums2Size);
+
+    printf("answer1: %d\n", ans1);
+    printf("answer2: %d\n", ans2);
+
+    return 0;
+}
+
+///////////////////////////////////////////////////////////////////////
+
+PYTHON : 
+
+def answer1(nums1, nums2):
+    set_nums2 = set(nums2)
+    count = 0
+    for num in nums1:
+        if num in set_nums2:
+            count += 1
+    return count
+
+def answer2(nums1, nums2):
+    set_nums1 = set(nums1)
+    count = 0
+    for num in nums2:
+        if num in set_nums1:
+            count += 1
+    return count
+
+nums1 = [1, 2, 3, 4, 5]
+nums2 = [3, 4, 5, 6, 7]
+
+ans1 = answer1(nums1, nums2)
+ans2 = answer2(nums1, nums2)
+
+print(f"answer1: {ans1}")
+print(f"answer2: {ans2}")
