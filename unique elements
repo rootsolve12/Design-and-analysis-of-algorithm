@@ -1,0 +1,63 @@
+C - PROGRAM :
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int* findUnique(int* nums, int numsSize, int* returnSize) {
+
+    int* unique_elements = (int*)malloc(numsSize * sizeof(int));
+    int unique_count = 0;
+    
+    int* visited = (int*)calloc(100001, sizeof(int)); 
+    
+    for (int i = 0; i < numsSize; ++i) {
+        if (!visited[nums[i]]) {
+            unique_elements[unique_count++] = nums[i];
+            visited[nums[i]] = 1;
+        }
+    }
+    
+    unique_elements = (int*)realloc(unique_elements, unique_count * sizeof(int));
+    *returnSize = unique_count;
+    
+    free(visited);
+    
+    return unique_elements;
+}
+
+int main() {
+    int nums[] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+    int numsSize = sizeof(nums) / sizeof(nums[0]);
+    int returnSize;
+    
+    int* unique_elements = findUnique(nums, numsSize, &returnSize);
+    
+    printf("Unique elements:");
+    for (int i = 0; i < returnSize; ++i) {
+        printf(" %d", unique_elements[i]);
+    }
+    printf("\n");
+    
+    free(unique_elements);
+    
+    return 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+PYTHON : 
+
+def find_unique(nums):
+    unique_elements = []
+    seen = set()
+    
+    for num in nums:
+        if num not in seen:
+            unique_elements.append(num)
+            seen.add(num)
+    
+    return unique_elements
+
+nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+unique_elements = find_unique(nums)
+print("Unique elements:", unique_elements)
