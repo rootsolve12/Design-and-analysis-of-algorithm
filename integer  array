@@ -1,0 +1,60 @@
+C - PROGRAM :
+
+#include <stdio.h>
+
+int sumOfSquares(int* nums, int numsSize) {
+    int sum = 0;
+
+    for (int i = 0; i < numsSize; ++i) {
+        int distinct_count = 0;
+        int freq[1001] = {0};  
+        for (int j = i; j < numsSize; ++j) {
+            freq[nums[j]]++;
+            
+            if (freq[nums[j]] == 1) {
+                distinct_count++;
+            }
+            
+            sum += distinct_count * distinct_count;
+        }
+    }
+
+    return sum;
+}
+
+int main() {
+    int nums[] = {1,1};
+    int numsSize = sizeof(nums) / sizeof(nums[0]);
+
+    int result = sumOfSquares(nums, numsSize);
+
+    printf("Sum of squares of distinct counts of all subarrays: %d\n", result);
+
+    return 0;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
+PYTHON : 
+
+def sum_of_squares(nums):
+    n = len(nums)
+    sum = 0
+   
+    for i in range(n):
+        distinct_count = 0
+        freq = [0] * 1001
+        for j in range(i, n):
+            
+            freq[nums[j]] += 1
+            
+            if freq[nums[j]] == 1:
+                distinct_count += 1
+            
+            sum += distinct_count * distinct_count
+    
+    return sum
+
+nums = [1, 2, 1]
+result = sum_of_squares(nums)
+print(f"Sum of squares of distinct counts of all subarrays: {result}")
